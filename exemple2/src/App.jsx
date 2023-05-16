@@ -11,9 +11,13 @@ function App() {
     setMessage('coucou')
   }, 2000)
 
+  const reclic = () => {
+    alert('reclic')
+  }
+
   return (
     <>
-      <Hello prenom="Téo" nom="Vkfdjlkdfj"/>
+      <Hello prenom="Téo" nom="Vkfdjlkdfj" reclic={reclic}/>
       <Hello prenom="Gaëtan"/>
       <Hello prenom="Edgar"/>
       <p>lorem</p>
