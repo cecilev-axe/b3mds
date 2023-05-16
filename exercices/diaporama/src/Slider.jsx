@@ -3,8 +3,12 @@ import { useState } from "react"
 const Slider = () => {
 
     const [index, setIndex] = useState(0)
+    const [play, setPlay] = useState(true)
+
+    let timer = null
 
     const next = () => {
+        clearTimeout(timer)
         //incrémenter l'index
         if(index < images.length - 1){
             setIndex(index+1)
@@ -14,9 +18,27 @@ const Slider = () => {
         }
     }
 
-    setTimeout(() => {
-       next()
-    }, 3000)
+    const previous = () => {
+        clearTimeout(timer)
+        //incrémenter l'index
+        if(index === 0){
+            setIndex(images.length - 1)
+        }
+        else{
+            setIndex(index - 1)
+        }
+    }
+
+    const pause = () => {
+        clearTimeout(timer)
+        setPlay(false)
+    }
+
+    if(play){
+        timer = setTimeout(() => {
+           next()
+        }, 3000)
+    }
 
     const images = [
         {
@@ -35,12 +57,21 @@ const Slider = () => {
 
 
     return(
-         
+         <>
             <figure>
                 <img src={images[index].src} />
                 <figcaption>{images[index].description}</figcaption>
             </figure>
-        
+            <button onClick={previous}>Previous</button>
+            <button onClick={next}>Next</button>
+
+            {
+                play ?
+                <button onClick={pause}>Pause</button>
+                :
+                <button onClick={() => setPlay(true)}>Play</button>
+            }
+        </>
 
     )
 }
