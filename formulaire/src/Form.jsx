@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 
 
 const Form = () => {
@@ -8,8 +8,20 @@ const Form = () => {
     const [message, setMessage] = useState("")
     const [pays, setPays] = useState("")
 
+    const age = useRef()
+
     const handleChange = (e) => {
         setNom(e.target.value)
+    }
+
+    const envoyer = () => {
+        let datas = {
+            "age" : age.current.value,
+            "nom" : nom,
+            "prenom" : prenom
+        }
+
+        console.log(datas)
     }
 
     return(
@@ -22,6 +34,11 @@ const Form = () => {
             <div>
                 <label htmlFor="nom">Nom</label>
                 <input type="text" id="nom" value={nom} onChange={handleChange}/>
+            </div>
+
+            <div>
+                <label htmlFor="age">Age</label>
+                <input type="text" id="age" ref={age}/>
             </div>
 
             <div>
@@ -39,6 +56,8 @@ const Form = () => {
                     <option value="zi">Zimbabwé</option>
                 </select>
             </div>
+
+            <button type="button" onClick={envoyer}>Soumettre</button>
             
         </form>
     )
