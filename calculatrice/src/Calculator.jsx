@@ -18,7 +18,7 @@ const reducer = (state, action) => {
         case "SET_NUMBER":
             return {
             ...state,
-            numbers: [...state.numbers, action.number],
+            numbers: [...state.numbers, action.number], //[1, 2, 3]
             display: state.display + action.number
             };
   
@@ -26,7 +26,7 @@ const reducer = (state, action) => {
         case "MULT":
         case "ADD":
         case "DIV":
-            number = parseInt(state.numbers.join(""));
+            number = parseInt(state.numbers.join("")); //123
     
             // pour le cas où on re-calcule quelque chose après avoir cliqué sur "="
             if (!isNaN(number)) {
